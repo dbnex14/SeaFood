@@ -87,7 +87,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             guard let results = request.results as? [VNClassificationObservation] else {
                 fatalError("Model failed to process image.")
             }
-            print(results)
+            
+            // get the higest result from classification
+            if let firstResult = results.first {
+                // tap into it
+                if firstResult.identifier.contains("hotdog") {
+                    self.navigationItem.title = "Hotdog"
+                } else {
+                    self.navigationItem.title = "Not Hotdog"
+                }
+            }
         }
         
         // perform request to clasiffy image using machine model
